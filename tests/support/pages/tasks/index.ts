@@ -20,13 +20,33 @@ export class TasksPage {
         await this.page.click('css=button >> text=Create')
     }
 
+    async toggle(taskName) {
+        const target = this.page.locator(`xpath=//p[text()="${taskName}"]/..//button[contains(@class,"Toggle")]`)
+        await target.click()
+    }
+
+    async remove(taskName) {
+        const target = this.page.locator(`xpath=//p[text()="${taskName}"]/..//button[contains(@class,"Delete")]`)
+        await target.click()
+    }
+
     async shouldHaveText(taskName: string) {
         const target = this.page.locator(`css=.task-item p >> text=${taskName}`)
         await expect(target).toBeVisible()
     }
 
-    async alertHaveText(text: string){
+    async shouldNotExist(taskName: string) {
+        const target = this.page.locator(`css=.task-item p >> text=${taskName}`)
+        await expect(target).not.toBeVisible()
+    }
+
+    async alertHaveText(text: string) {
         const target = this.page.locator('.swal2-html-container')
         await expect(target).toHaveText(text)
+    }
+
+    async shouldBeDone(taskName: string){
+        const target = this.page.getByText(taskName)
+        await expect(target).toHaveCSS('text-decoration-line', 'line-through')
     }
 }
