@@ -1,4 +1,4 @@
-# Testes E2E com o CodeceptJS
+# Testes E2E com o Playwright
 
 ## Introdução
 Segue o projeto E2E da aplicação Mark L através do framework Playwright em TypeScript testes Web e API.
